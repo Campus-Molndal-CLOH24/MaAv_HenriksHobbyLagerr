@@ -14,7 +14,7 @@ namespace HenriksHobbyLager.Database
 
         public MongoDbContext()
         {
-            var client = new MongoClient("mongodb+srv://avinashbodduluri:0143@cluster0.zgftr.mongodb.net/");
+            var client = new MongoClient("mongodb://localhost:27017");
             _database = client.GetDatabase("ProductInventory");
         }
 

@@ -1,14 +1,15 @@
 ﻿using System;
 
-namespace HenriksHobbyLager.ProgramManager
+namespace HenriksHobbyLager
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            ProgramManager programManager = new ProgramManager();  // Skapar en instans av ProgramManager
-            programManager.Run();  // Kör logiken från ProgramManager
+            ProgramManager programManager = new ProgramManager();  // Skapa instans av ProgramManager
+            programManager.Run();  // Kör hela programmet
         }
     }
 }
+
 

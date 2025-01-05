@@ -2,74 +2,117 @@
 
 ## Interfaces
 
-### IProductRepository;
+### IProductFacade
+Är ett gränssnitt som definierar vilka metoder som ska finnas i en implementerande klass (i detta fallet Products).
 
-Interfacet IProductRepository fastställer standardoperationerna för att hantera produkter i datalagret. Det följer SOLID-principerna genom att vara välstrukturerat och fokuserat på en specifik uppgift. Detta möjliggör enkel utbytbarhet av implementationer och framtida utökningar av applikationen.
+### IRepository
+Är ett generellt gränssnitt som definierar basoperationer för CRUD (Create, Read, Update, Delete) mot databasen.
 
-### IProduct;
+## Models
 
-Interfacet IProduct fungerar som en bas för att definiera egenskaper för produkter i applikationen. Det hjälper till att skapa en enhetlig struktur för klasser som hanterar produkter, vilket gör det enkelt att utöka systemet vid behov. Det följer SOLID-principerna och möjliggör lös koppling och återanvändbarhet.
+### Products
+Denna klass fungerar som en modell för produkter i applikationen, och definierar vilka egenskaper varje produkt ska ha.
 
-### IProductServices;
+Vad man kan göra framöver är att implementera en ProductService som separerar databasoperationer från affärslogik. ProductService skulle fungera som en mall för vad varje produkt skall innehålla. 
+Har man en IProductService så kan man även använda samma bas för andra tabeller, tex om man vill skapa en för tapeter.
 
-Interfacet IProductService definierar de huvudsakliga metoderna för att hantera produkter i applikationen. Det fokuserar på affärslogik och tillhandahåller funktionalitet för att lägga till, ta bort, uppdatera och visa produkter.
+#### Exempel IProductService; 
 
-Metoderna är utformade för att stödja enkel interaktion med produktdata och kan implementeras på olika sätt beroende på applikationens behov. Interfacet följer SOLID-principerna genom att möjliggöra flexibel koppling och utbytbarhet av implementationer.
+```
+namespace HenriksHobbyLager.Interfaces {
+    public interface IProductService {
+        IEnumerable<Product> GetAllProducts();
+        Product GetProductById(int id);
+        void AddProduct(Product product);
+        void UpdateProduct(Product product);
+        void DeleteProduct(int id);
+        IEnumerable<Product> SearchProducts(Func<Product, bool> predicate);
+    }
+}
+```
+#### Exempel implementering av ProductService; 
 
-## Program
+```namespace HenriksHobbyLager.Services {
+    public class ProductService : IProductService {
+        private readonly IProductRepository _repository;
 
-### ProgramManager; 
+        public ProductService(IProductRepository repository) {
+            _repository = repository;
+        }
 
-HenriksHobbyLagerProgramManager är ansvarig för programmets huvudflöde. Den sköter interaktionen med användaren genom att visa en meny, läsa användarinmatning och utföra åtgärder baserade på användarens val.
+        public IEnumerable<Product> GetAllProducts() => _repository.GetAll();
+
+        public Product GetProductById(int id) => _repository.FindById(id);
+
+        public void AddProduct(Product product) => _repository.Add(product);
+
+        public void UpdateProduct(Product product) => _repository.Update(product);
+
+        public void DeleteProduct(int id) => _repository.Delete(id);
+
+        public IEnumerable<Product> SearchProducts(Func<Product, bool> predicate) => _repository.Search(predicate);
+    }
+}
+```
+
+Skulle tapeter innehålla ett unikt attribut som tex färg, så kan man lägga till det specifikt i tabellen för tapeter, utan att det påverkar andra.
+
+## Repositories
+
+### MongoDbRepository
+Innehåller inställningar för att koppla upp sig till en MongoDb-databas.
+
+### SqliteRepository
+Innehåller inställningar för att koppla upp sig till en SQLite-databas.
+
+#### Jämförelse mellan SQLite och MongoDB Repositories
+
+Funktion              | SQLite                         | MongoDB  
+----------------------|---------------------------------|--------------------------------------  
+Databaskoppling       | Använder AppDbContext           | Använder MongoDbContext  
+Hämta alla produkter  | Products.ToList()               | Products.Find(_ => true).ToList()  
+Hämta produkt via ID  | Products.Find(id)               | Products.Find(p => p.Id == id).FirstOrDefault()  
+Lägg till produkt     | Products.Add(entity), SaveChanges() | Products.InsertOne(entity)  
+Uppdatera produkt     | Products.Update(entity), SaveChanges() | Products.ReplaceOne(p => p.Id == entity.Id, entity)  
+Ta bort produkt       | Products.Remove(product), SaveChanges() | Products.DeleteOne(p => p.Id == id)  
+
+## ZProgram
+
+### Program 
+
+Denna klass fungerar som applikationens startpunkt. Den instansierar och anropar ProgramManager, som hanterar huvudlogiken för programmet. Designen separerar programmets startflöde från dess kärnlogik, vilket gör koden renare och enklare att underhålla.
+
+Skapa och anropa ProgramManager.
+Starta huvudloopen för applikationen.
+Följande principer i SOLID:
+SRP och OCP. Gör det enkelt att isolera och testa huvudlogiken i en separat klass. Håller Main-metoden kort och överskådlig.
+
+### ProgramManager
+
+ProgramManager är ansvarig för programmets huvudflöde. Den sköter interaktionen med användaren genom att visa en meny, läsa användarinmatning och utföra åtgärder baserade på användarens val.
 
 Primära uppgifter:
-
-- Visa menyalternativ via en MenuHandler.
-- Validera användarens val och kalla på rätt funktion.
-- Stänga av programmet när användaren väljer att avsluta.
-
 Klassen följer principerna om separation av ansvar och modularitet, vilket gör den lätt att underhålla och utöka.
 
-### Program; 
+Struktur:
 
-Denna klass fungerar som applikationens startpunkt. Den instansierar och anropar HenriksHobbyLagerProgramManager, som hanterar huvudlogiken för programmet. Designen separerar programmets startflöde från dess kärnlogik, vilket gör koden renare och enklare att underhålla.
-
-- Skapa och anropa HenriksHobbyLagerProgramManager.
-- Starta huvudloopen för applikationen.
-
-Följande principer i SOLID: 
-
-SRP och OCP.
-Gör det enkelt att isolera och testa huvudlogiken i en separat klass.
-Håller Mainmetoden kort och överskådlig.
-
-
-
-## Struktur
-
-| Katalog         | Fil(er)                                   |
-|------------------|-------------------------------------------|
-| Data            | HHL.sqlite                               |
-| Database        | AppDbContext.cs                          |
-| Database        | SqliteDatabaseInitializer.cs             |
-| Interfaces      | IProduct.cs, IProductRepository.cs, IProductService.cs |
-| Models          | Product.cs                               |
-| ProgramManager  | LagerProgramManager.cs                   |
-| Repositories    | ProductRepositories.cs                   |
-| Services        | ConsoleHelper.cs, MenuHandler.cs, ProductServices.cs |
+```
+HenriksHobbyLager/
+├── Database/
+│   ├── AppDbContext.cs
+│   └── MongoDbContext.cs
+├── Interfaces/
+│   ├── IProductFacade.cs
+│   └── IRepository.cs
+├── Models/
+│   └── Product.cs
+├── Repositories/
+│   ├── MongoDbRepository.cs
+│   └── SqliteRepository.cs
+└── ZProgram/
+    ├── Program.cs
+    └── ProgramManager.cs
+```
 
 
-## Sekvensdiagram
-
-<img width="473" alt="image" src="https://github.com/user-attachments/assets/ce27ba06-50f8-4699-9989-e0de75281650" />
-
-
-
-
-
-
-
-
-
-
-
+Sekvensdiagram MÅSTE LÄGGAS TILL

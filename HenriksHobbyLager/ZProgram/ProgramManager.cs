@@ -3,7 +3,7 @@ using HenriksHobbyLager.Models;
 using HenriksHobbyLager.Repositories;
 using System;
 
-namespace HenriksHobbyLager
+namespace HenriksHobbyLager.ProgramManager
 {
     public class ProgramManager
     {

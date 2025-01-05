@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HenriksHobbyLager
+namespace HenriksHobbyLager.ProgramManager
 {
     class Program
     {

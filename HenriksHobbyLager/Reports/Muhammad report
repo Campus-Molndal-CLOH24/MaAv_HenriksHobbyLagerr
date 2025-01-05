@@ -1,3 +1,6 @@
+# Individuell Rapport
+
+## Muhammad Aamir Hussain
 
 # Hur fungerade gruppens arbete?
 ## Vår grupp fungerade bra eftersom vi hade en öppen dialog och hjälptes åt när vi stötte på problem. 
@@ -18,3 +21,36 @@ Single Responsibility Principle (SRP): Vi separerade ansvaret i olika klasser. T
 Open/Closed Principle (OCP): Vår kod kunde utökas utan att behöva ändras i grunden, vilket jag förstod var en viktig princip.
 Dependency Inversion Principle (DIP): Vi använde dependency injection för att hantera beroenden mellan olika delar av koden.
 Det var svårt att greppa allt i början, men med hjälp av gruppen och lite extra research kunde jag förstå hur principerna tillämpades i vårt projekt.
+
+
+# Vilka patterns använde ni och varför?
+## Vi använde flera designmönster i projektet, även om jag inte var medveten om alla namn från början. Här är några av de mönster vi använde:
+
+Repository Pattern: För att separera databasanrop från programlogiken.
+Unit of Work (Implicit): Detta hjälpte till att hantera flera databasoperationer som en enhet.
+CRUD Pattern: Vi implementerade de grundläggande operationerna (Create, Read, Update, Delete) för vår databas.
+Dependency Injection: Detta användes för att göra koden mer flexibel och testbar.
+
+# Vilka tekniska utmaningar stötte ni på och hur löste ni dem?
+## En av de största utmaningarna var att databasen först var en fysisk fil på systemet och att detta behövde ändras till en kodbaserad implementation i Visual Studio. 
+Det här var något jag inte kunde bidra mycket till, men jag såg hur Avinash löste det, vilket var lärorikt.
+
+En annan utmaning för mig personligen var att förstå och använda GitHub-kommandon. 
+Jag tog hjälp av gruppmedlemmar och lärde mig hur man klonar ett projekt, gör commits och pushar ändringar.
+Det var också en utmaning att arbeta med både grundläggande och mer avancerade koncept samtidigt, men det gav mig en bredare förståelse.
+
+# Vilka delar gjorde du?
+##
+-Deltog i diskussioner och problemlösningar.
+-Försökte förstå koden och testade den för att se hur den fungerade.
+-Lärde mig och använde GitHub-kommandon för att bidra till projektet.
+-Bidrog med att ge feedback och idéer under arbetets gång.
+
+
+# Vad skulle du göra annorlunda nästa gång?
+## 
+-Försöka planera min tid bättre och sätta av mer tid för att förstå detaljerna.
+-Våga fråga ännu mer när jag inte förstår något.
+-Lägga mer fokus på att lära mig de tekniska verktygen som används, som GitHub och databashantering.
+-Vara mer aktiv i att bidra, även om jag känner att jag inte kan så mycket än.
+-Använda någon form av struktur, som en kanban-tavla, för att hålla koll på vad som behöver göras.

@@ -14,6 +14,9 @@ Det svåra med arbeten som dessa är nog att fördela uppgifterna, så att man a
 
 Jag gjorde den från början i DBrowser, men vid ett av de senare möten vi hade med Marcus som framgick det att det behövde vara en skapad via kod i VS. Så den delen fick vi göra om, och Avinash axlade den nya implementationen. Det var nog för att jag tolkade meningen "migratiosnfiler om möjligt" som att har vi gjort den i VS med kod så ska vi  ha migrationfiler, om inte så behövs det inte. Och jag hade nog inte fattat att vi skulle göra den med kod.
 
+Avinash kämpade på att lösa MongoDb, men valde tillslut att göra om projektet, detta så därmed kommer vi att skicka in två. Ett färdigt och ett som inte är färdigt, just för att kunna visa att jag har gjort delar av ett projekt som vi dock inte kunde ro i hamn. 
+
+
 ## Vilka SOLID-principer implementerade ni och hur?
 
 Tänker jag visar ett exempel, istället för att skriva en massa text.
@@ -22,7 +25,7 @@ Internal class Program
 {
     private static void Main(string[] args)
     {
-        var programManager = new HenriksHobbyLagerProgramManager();//Hanterar programmet, Logiken har fått en egen klass 
+        var programManager = new ProgramManager();//Hanterar programmet, Logiken har fått en egen klass 
         programManager.Run();
     }
 }
@@ -98,11 +101,16 @@ Efter att vi startat en ny grupp, så frågade jag dem om jag kunde börja själ
 Gällande planering så är jag väl lite sisådär på att hålla planeringen, men det hade varit ännu värre om jag inte haft någon. Jag försökte förstå vad det var jag höll på med, ta igen det jag missat paralellt med att jag arbetade. Och var väldigt frågvis till ChatGtp. Som så många gånger förr så vet jag vad det är jag vill, jag har det i huvudet men kan inte riktigt få ner det i kod själv ännu helt 100. 
 
 ## Vilka dela gjorde du?
-
-- Den ursprungliga databasen.
-- Mappar och klasser/kod.
+Första projektet; 
+- Den ursprungliga databasen i det första projektet.
+- Mappar och klasser/kod i det första projektet.
 - Strukturträdet.
-- Halva README.
+- README.
+
+Detta projekt;
+- Flyttade logiken i main till en egen klass.
+- README
+
 
 ## Vilka utmaningar stötte du på och hur löste du dem?
 

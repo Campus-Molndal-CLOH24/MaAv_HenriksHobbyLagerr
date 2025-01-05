@@ -1,0 +1,20 @@
+
+# Hur fungerade gruppens arbete?
+## Vår grupp fungerade bra eftersom vi hade en öppen dialog och hjälptes åt när vi stötte på problem. 
+Jag var med från början och deltog i diskussioner om hur vi skulle lösa olika delar av projektet. 
+Det var ibland svårt att hänga med eftersom jag studerade både grundläggande och mer avancerade ämnen samtidigt, men gruppen var stöttande och hjälpte till när det behövdes. 
+Alla bidrog på sitt sätt, och vi fick en färdig produkt som fungerade bra till slut.
+
+# Beskriv gruppens databasimplementation
+## Jag har ännu inte haft kursen om databaser, så jag deltog inte i själva implementeringen av databasen. 
+Däremot var jag med och diskuterade lösningar och försökte förstå hur den skulle fungera. 
+Från början hade vi en fysisk databasfil på systemet, men det behövde ändras till en implementation via kod i Visual Studio.
+Avinash tog över den delen och löste det på ett bra sätt, vilket jag lärde mig mycket av genom att följa processen.
+
+# Vilka SOLID-principer implementerade ni och hur?
+## Jag är fortfarande nybörjare på att förstå SOLID-principerna fullt ut, men jag märkte hur vi följde några av dem i vår kod. 
+
+Single Responsibility Principle (SRP): Vi separerade ansvaret i olika klasser. Till exempel hade vi en klass för att hantera själva programlogiken och en annan för att interagera med databasen.
+Open/Closed Principle (OCP): Vår kod kunde utökas utan att behöva ändras i grunden, vilket jag förstod var en viktig princip.
+Dependency Inversion Principle (DIP): Vi använde dependency injection för att hantera beroenden mellan olika delar av koden.
+Det var svårt att greppa allt i början, men med hjälp av gruppen och lite extra research kunde jag förstå hur principerna tillämpades i vårt projekt.

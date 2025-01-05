@@ -13,7 +13,7 @@ namespace HenriksHobbyLager
 
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("=== Henriks HobbyLager™ 2.0 ===");
             Console.WriteLine("Select Database:");
@@ -248,7 +248,7 @@ namespace HenriksHobbyLager
                 Console.WriteLine("Söktermen får inte vara tom! Försök igen.");
                 return;
             }
-            var results = _repository.Search(p => p.Name.ToLower().Contains(searchTerm) || p.Category.ToLower().Contains(searchTerm));
+            var results = _repository.Search(p => (p.Name?.ToLower().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false) || (p.Category?.ToLower().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false));
 
             if (!results.Any())
             {

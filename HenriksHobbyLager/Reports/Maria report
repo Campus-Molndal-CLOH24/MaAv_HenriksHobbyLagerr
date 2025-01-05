@@ -1,0 +1,125 @@
+# Individuell Rapport
+
+Maria Schillström
+
+## Hur fungerade gruppens arbete?
+
+För min del som hade det lite svårt i början av detta grupparbete, (och valde att hoppa av för jag inte mäktade med stressen och ångesten som jag fick), så blev resultatet i slutändan väldigt bra, hoppas jag. Det är i alla fall min känsla. 
+
+Jag tror att vi i den nya gruppen hade ungefär samma tanke vid start, att vi gör vad vi kan, vi hjälps åt om vi inte förstår, och det kvittar om någon gör mer och någon mindre, det jämnar ut sig, och vissa delar är mer tidskrävande än andra. VIi låg nog ungefär på samma nivå också inför den här uppgiften vilket nog hjälpte. 
+
+Det svåra med arbeten som dessa är nog att fördela uppgifterna, så att man använder resurerna på bästa sätt, men samtidigt ger alla andra en chans att få göra något. Även om man inte skulle göra så mycket så gör man nog mycket ändå, för man förhoppningsvis lär sig något och får en annan förståelse om man arbetar ihop med andra i ett projekt. Så är det i alla fall för mig.  
+
+## Beskriv gruppens databasimplementation
+
+Jag gjorde den från början i DBrowser, men vid ett av de senare möten vi hade med Marcus som framgick det att det behövde vara en skapad via kod i VS. Så den delen fick vi göra om, och Avinash axlade den nya implementationen. Det var nog för att jag tolkade meningen "migratiosnfiler om möjligt" som att har vi gjort den i VS med kod så ska vi  ha migrationfiler, om inte så behövs det inte. Och jag hade nog inte fattat att vi skulle göra den med kod.
+
+## Vilka SOLID-principer implementerade ni och hur?
+
+Tänker jag visar ett exempel, istället för att skriva en massa text.
+
+Internal class Program
+{
+    private static void Main(string[] args)
+    {
+        var programManager = new HenriksHobbyLagerProgramManager();//Hanterar programmet, Logiken har fått en egen klass 
+        programManager.Run();
+    }
+}
+
+Single Responsibility Principle (SRP):
+Klassen ansvarar endast för att starta programmet. Den delegerar all annan logik till HenriksHobbyLagerProgramManager, vilket följer SRP.
+
+Open/Closed Principle (OCP):
+Klassen behöver inte ändras vid utökning eller ändringar i logiken, eftersom det hanteras av HenriksHobbyLagerProgramManager.
+
+Liskov Substitution Principle (LSP):
+Är inte tillämpbart här då det inte finns några abstraktioner i klassen.
+
+Interface Segregation Principle (ISP):
+Klassen är enkel och beroende på minimal logik, vilket gör att den inte bryter mot ISP.
+
+Dependency Inversion Principle (DIP):
+Klassen använder en konkret implementation av HenriksHobbyLagerProgramManager. 
+
+## Vilka patterns använde ni och varför?
+
+Det här fick jag fuska mig till om jag ska vara ärlig, och använda ChatGtp för detta med patterns är jag inte så haj på ännu. 
+
+Så jag ställde;
+
+Hur kommer det sig att jag har gjort alla dessa pattern men vet inte om det och knappt vad de betyder?
+
+Svaret blev; Det är en väldigt vanlig situation, och faktiskt något positivt! 
+Det visar att du redan tillämpar best practices och designprinciper utan att du kanske formellt har lärt dig deras namn eller teori bakom dem. 
+
+Här är varför detta händer(här fick jag flera förklaringar, valde att dela med mig av två);
+
+1. Designmönster är ofta inbyggda i verktyg och ramverk
+Många moderna ramverk som Entity Framework Core och ASP.NET Core har designmönster som en del av sitt grundkoncept.
+Du använder mönster som Repository och Unit of Work automatiskt när du följer dokumentation eller tutorials, även om de inte alltid förklarar mönstren vid namn.
+Exempel:
+
+När du använder DbContext i Entity Framework, använder du implicit Unit of Work och Factory Pattern utan att behöva implementera dessa själv.
+
+2. Du följer "Best Practices"
+När du skriver kod som känns logisk och välorganiserad (t.ex. genom att separera databaslogik i en ProductRepository), följer du indirekt designprinciper som Separation of Concerns.
+Många tutorials och guider lär ut dessa mönster utan att kalla dem vid deras "officiella" namn.
+
+Nedan följer de pattern vi har använt oss av! 
+- Repository Pattern
+
+- Unit of Work (Implicit)
+
+- Factory Pattern (Implicit)
+
+- Dependency Injection (Potentiellt)
+
+- CRUD Pattern
+
+Standard för databasoperationer:
+Create: Add()
+Read: GetAll(), GetById()
+Update: Update()
+Delete: Delete()
+
+- Lazy Loading / Explicit Loading (Implicit i EF Core)
+
+- Separation of Concerns
+
+## Vilka tekniska utmaningar stötte ni på och hur löste ni dem?
+
+Jag lyckades ange fel connectionstring till databasen jag skapat, så det hände ingenting när jag skulle köra programmet. Det visade sig att jag hade mina projekt sparade på olika ställen på datorn, och att jag hade missat att ta bort tidigare påbörjade projekt av HenriksHobbyLager, så jag valde fel. 
+Vi stötte även på patrull med update, då istället för att lämna name tomt, för att behålla namnet, så blev det utan namn. Det genererade att även delete blev fel, och efter x antal timmar att försöka lösa det så lämnade jag fint över det till mina andra gruppmedlemmar. 
+
+## Hur planerade du ditt arbete?
+
+Efter att vi startat en ny grupp, så frågade jag dem om jag kunde börja själv då vi hade lite svårt att få ihop det med tider, för att vi inte skulle få göra allt i sista stund. Så jag började från scratch, som om jag var själv, och sen bestämde jag mig för att inte göra mer när jag gjort alla mappar, fixat med klasserna, samt databasen. 
+Gällande planering så är jag väl lite sisådär på att hålla planeringen, men det hade varit ännu värre om jag inte haft någon. Jag försökte förstå vad det var jag höll på med, ta igen det jag missat paralellt med att jag arbetade. Och var väldigt frågvis till ChatGtp. Som så många gånger förr så vet jag vad det är jag vill, jag har det i huvudet men kan inte riktigt få ner det i kod själv ännu helt 100. 
+
+## Vilka dela gjorde du?
+
+- Den ursprungliga databasen.
+- Mappar och klasser/kod.
+- Strukturträdet.
+- Halva README.
+
+## Vilka utmaningar stötte du på och hur löste du dem?
+
+Hela grupparbetet var en utmaning, från början till slut. Förstå vad det är man gör, komma ikapp, sätta av tid dels själv men även i grupp. Det var inte samma utmaningar dock i de två grupper som jag var med i. 
+
+## Vad skulle du göra annorlunda nästa gång?
+
+Detta är generellt och pekar inte på någon specifik grupp.
+
+- Vara med bestämd när det gäller att ha kontinuerliga möten i guppen, och allt vad det innebär med fördelning, planering, koda ihop, koda på egen hand.
+- Inte vara så hård mot mig själv, sänka kraven.
+- Våga fråga om hjälp, vara ärligt med att jag inte förstår.
+- Inte göra mer än jag måste om jag inte känner att jag har tiden eller kunskapen.
+- Fråga mer om vad som krävs för att få ett godkänt betyg, så jag inte kör slut på mig själv.
+- Ha en kanban eller någon annan slags struktur för arbetet. 
+
+  
+
+  
+- 

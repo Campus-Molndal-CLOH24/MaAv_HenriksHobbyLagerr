@@ -94,6 +94,7 @@ ProgramManager är ansvarig för programmets huvudflöde. Den sköter interaktio
 Primära uppgifter:
 Klassen följer principerna om separation av ansvar och modularitet, vilket gör den lätt att underhålla och utöka.
 
+---
 Struktur:
 
 ```
@@ -114,5 +115,49 @@ HenriksHobbyLager/
     └── ProgramManager.cs
 ```
 
+---
+**Sekvensdiagram som visar programstartflödet**
 
-Sekvensdiagram MÅSTE LÄGGAS TILL
+```mermaid
+sequenceDiagram
+    participant User as User
+    participant Main as Program.Main
+    participant PM as ProgramManager
+    participant Repo as Repository
+
+    User->>Main: Start Application
+    Main->>PM: Create ProgramManager
+    Main->>PM: Run()
+    PM->>User: Show database options
+    User->>PM: Select database type
+    alt SQLite selected
+        PM->>Repo: Create SqliteRepository
+    else MongoDB selected
+        PM->>Repo: Create MongoDbRepository
+    end
+    PM->>PM: RunApplication(repository)
+```
+---
+**Använt appsettings.json för hantering av anslutningssträngar, genom att injicera dem i DbContext-klasserna med hjälp av beroendeinjektion.**
+```mermaid
+classDiagram
+    class AppDbContext {
+        +DbSet~Product~ Products
+        #OnConfiguring(DbContextOptionsBuilder)
+        #OnModelCreating(ModelBuilder)
+    }
+    class MongoDbContext {
+        -IMongoDatabase _database
+        +MongoDbContext()
+        +IMongoCollection~T~ GetCollection~T~(string)
+    }
+    class IConfiguration {
+        +GetConnectionString(string) string
+    }
+    AppDbContext ..> IConfiguration : Använder
+    MongoDbContext ..> IConfiguration : Använder
+    note for AppDbContext "Använder nu appsettings.json
+för SQLite-anslutningssträng"
+    note for MongoDbContext "Använder nu appsettings.json
+för MongoDB-anslutningssträng"
+```

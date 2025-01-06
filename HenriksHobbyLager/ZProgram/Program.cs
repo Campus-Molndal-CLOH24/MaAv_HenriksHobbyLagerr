@@ -1,12 +1,13 @@
-﻿using System;
+﻿using HenriksHobbyLager.ZProgram;
+using System;
 
-namespace HenriksHobbyLager
+namespace HenriksHobbyLager.ZProgram
 {
     class Program
     {
         static void Main()
         {
-            ProgramManager programManager = new ProgramManager();  // Skapa instans av ProgramManager
+            var programManager = new ProgramManager();  // Skapa instans av ProgramManager
             programManager.Run();  // Kör hela programmet
         }
     }

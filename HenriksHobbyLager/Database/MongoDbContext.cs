@@ -1,4 +1,5 @@
 ﻿using HenriksHobbyLager.Models;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,14 @@ namespace HenriksHobbyLager.Database
 
         public MongoDbContext()
         {
-            var client = new MongoClient("mongodb://localhost:27017");
+            // Load configuration from appsettings.json
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+            // Get connection string
+            var mongoDbConnectionString = config.GetConnectionString("MongoDB");
+            var client = new MongoClient(mongoDbConnectionString);
             _database = client.GetDatabase("ProductInventory");
         }
 

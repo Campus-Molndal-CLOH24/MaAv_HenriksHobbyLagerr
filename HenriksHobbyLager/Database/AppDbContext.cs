@@ -1,5 +1,6 @@
 ﻿using HenriksHobbyLager.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,14 @@ namespace HenriksHobbyLager.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=products.db");
+            // Load configuration from appsettings.json
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+            // Get connection string
+            var sqliteConnectionString = config.GetConnectionString("SQLite");
+            optionsBuilder.UseSqlite(sqliteConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

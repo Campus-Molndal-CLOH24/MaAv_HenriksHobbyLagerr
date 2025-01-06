@@ -22,13 +22,17 @@ Svara på frågorna nedan och lämna in det som en del av din inlämning.
   We have used repository pattern to handle different database connections.The repository pattern provides a clean abstraction layer between the business logic and the database logic.  Application logic (like adding, updating, and searching products) doesn't need to know whether the database is SQLite or MongoDB. It simply interacts with the repository interface (IRepository<T>).
 ---
 ## Vilka tekniska utmaningar stötte ni på och hur löste ni dem?
-  
+  I have struggled to understand mongodb part, but i have gone through lessons again & after few online tutorials got good understanding.
 ---
 ## Hur planerade du ditt arbete?
+  We have started by following instructions given by Marcus and went step by step.
 ---
 ## Vilka dela gjorde du?
+ I have done most of coding for Database connections for Sqlite & MongoDb and CRUD operations. Also, Handled few exceptions while userinput needed.
+ For example: Wrong input by user for adding product information like price & name.
 ---
 ## Vilka utmaningar stötte du på och hur löste du dem?
+ Handling exceptions like while we wrong input for name, i have solved them after help from Chatgpt and material from lessons.
 ---
 ## Vad skulle du göra annorlunda nästa gång?
-  Next Project 
+  Next Project better planning together as group. share work in more organised way.

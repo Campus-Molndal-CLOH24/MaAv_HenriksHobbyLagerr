@@ -28,8 +28,9 @@ Svara på frågorna nedan och lämna in det som en del av din inlämning.
   We have started by following instructions given by Marcus and went step by step.
 ---
 ## Vilka dela gjorde du?
- I have done most of coding for Database connections for Sqlite & MongoDb and CRUD operations. Also, Handled few exceptions while userinput needed.
- For example: Wrong input by user for adding product information like price & name.
+ I have handled coding for Database connections for Sqlite & MongoDb and CRUD operations. 
+ Moved connections strings to Appsettings.json & used Dependency injection instead of hard coding connection strings. 
+ Also, Handled few exceptions while userinput needed. For example: Wrong input by user for adding product information like price & name.
 ---
 ## Vilka utmaningar stötte du på och hur löste du dem?
  Handling exceptions like while we wrong input for name, i have solved them after help from Chatgpt and material from lessons.

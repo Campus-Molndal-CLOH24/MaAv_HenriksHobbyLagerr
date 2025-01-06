@@ -4,7 +4,7 @@ using HenriksHobbyLager.Repositories;
 using System;
 using System.Linq;
 
-namespace HenriksHobbyLager
+namespace HenriksHobbyLager.ZProgram
 {
     public class ProgramManager
     {
@@ -21,11 +21,11 @@ namespace HenriksHobbyLager
             {
                 case "1":
                     Console.WriteLine("SQLite selected");
-                    RunApplication(new SqliteRepository());  // Exempel på SQLite-repository
+                    RunApplication(new SqliteRepository());  
                     break;
                 case "2":
                     Console.WriteLine("MongoDB selected");
-                    RunApplication(new MongoDbRepository());  // Exempel på MongoDB-repository
+                    RunApplication(new MongoDbRepository());  
                     break;
                 case "3":
                     Console.WriteLine("Application closed");
@@ -114,7 +114,7 @@ namespace HenriksHobbyLager
             }
 
             Console.Write("Pris: ");
-            if (!decimal.TryParse(Console.ReadLine(), out var price) || price <= 0)
+            if (!decimal.TryParse(Console.ReadLine(), out var price) || price <= 0) // Kontrollerar Pris kan inte vara 0 eller Negativit
             {
                 Console.WriteLine("Ogiltigt pris! Priset måste vara ett positivt tal.");
                 return;
@@ -166,9 +166,15 @@ namespace HenriksHobbyLager
                 product.Name = name;
 
             Console.Write("Nytt pris: ");
-            if (decimal.TryParse(Console.ReadLine(), out var price) && price > 0)
+            if (!decimal.TryParse(Console.ReadLine(), out var price) || price <= 0) // Kontrollerar Pris kan inte vara 0 eller Negativit
+            {
+                Console.WriteLine("Ogiltigt pris! Priset måste vara ett positivt tal.");
+                return;
+            }
+            else 
+            {
                 product.Price = price;
-
+            }
             Console.Write("Ny lagermängd: ");
             if (int.TryParse(Console.ReadLine(), out var stock))
                 product.Stock = stock;
@@ -217,8 +223,8 @@ namespace HenriksHobbyLager
             }
 
             var results = repository.Search(p =>
-                (p.Name?.ToLower().Contains(searchTerm) ?? false) ||
-                (p.Category?.ToLower().Contains(searchTerm) ?? false));
+                (p.Name?.ToLower().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                (p.Category?.ToLower().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false));
 
             if (!results.Any())
             {

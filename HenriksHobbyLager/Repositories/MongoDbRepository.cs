@@ -17,7 +17,7 @@ namespace HenriksHobbyLager.Repositories
         public MongoDbRepository()
         {
             _context = new MongoDbContext();
-            _context.SeedData();
+            _context.SeedData(); // Initialize databas med 46 produkter if empty
         }
 
         public IEnumerable<Product> GetAll() => _context.Products.Find(_ => true).ToList();
